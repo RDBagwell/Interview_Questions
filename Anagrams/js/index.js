@@ -31,6 +31,3 @@ function stripString(str) {
 function cleanString(str) {
    return str.replace(/[^\w]/g, '').toLowerCase().split('').sort().join('');
 }
-
-
-console.log(anagrams2('Whoa! Hi!', 'Hi! WHOA!'));
