@@ -10,7 +10,6 @@ function anagrams(stringA, stringB) {
    return true;
 }
 
-
 function anagrams2(stringA, stringB) {
    return (cleanString(stringA) === cleanString(stringB));
 }
