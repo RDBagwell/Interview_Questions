@@ -1,30 +1,36 @@
 function anagrams(stringA, stringB) {
-   const charsA = {};
-   const charsB = {};
-
-   let newStringA  = stringA.replace(/[^\w]/g, '').toLowerCase();
-   let newStringB  = stringB.replace(/[^\w]/g, '').toLowerCase();
-
-   if(newStringA.length !== newStringB.length){
-      return false;
-   }
-
-   for (let charA of newStringA) {
-      (!charsA[charA]) ? charsA[charA] = 1 : charsA[charA] ++;
-   }
-
-   for (let charB of newStringB) {
-      (!charsB[charB]) ? charsB[charB] = 1 : charsB[charB] ++;
-   }
-
-   for (const key in charsA) {
-      if(charsA[key] !== charsB[key]){
+   const charMapA = setCharMap(stringA);
+   const charMapB = setCharMap(stringB);
+   if(stripString(stringA).length !== stripString(stringB).length) return false;
+   for (const key in charMapA) {
+      if(charMapA[key] !== charMapB[key]){
          return false
       }
    }
    return true;
-
 }
 
 
-console.log(anagrams('Whoa! Hi!', 'Hi! WHOA!'));
+function anagrams2(stringA, stringB) {
+   return (cleanString(stringA) === cleanString(stringB));
+}
+
+
+function setCharMap(str) {
+   const charMap = {};
+   for (const char of stripString(str)) {
+      (!charMap[char]) ? charMap[char] = 1 : charMap[char]++;
+   }
+   return charMap;
+}
+
+function stripString(str) {
+   return str.replace(/[^\w]/g, '').toLowerCase();
+}
+
+function cleanString(str) {
+   return str.replace(/[^\w]/g, '').toLowerCase().split('').sort().join('');
+}
+
+
+console.log(anagrams2('Whoa! Hi!', 'Hi! WHOA!'));
