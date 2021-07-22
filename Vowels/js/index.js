@@ -12,8 +12,5 @@ function vowels2(str) {
             count++;
         }
     }
-    console.log(count)
     return count
 }
-
-vowels2("Hi There")
