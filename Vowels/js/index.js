@@ -1,7 +1,6 @@
 function vowels(str) {
     const vowelsCount = str.match(/[aeiou]/gi);
-    if(!vowelsCount) return 0;
-    return vowelsCount.length
+    return (!vowelsCount) ? 0 : vowelsCount.length;
 }
 
 function vowels2(str) {
