@@ -73,7 +73,6 @@ class LinkedList{
     }
 
     getAt(index){
-        // if(index < 0) return null;
         let counter = 0;
         let node = this.head;
         while (node) {
@@ -129,11 +128,3 @@ class LinkedList{
         }
     }
 }
-
-const ll = new LinkedList()
-ll.insertFirst(1)
-ll.insertFirst(2)
-ll.insertFirst(3)
-ll.insertFirst(4)
-ll.insertAt(5, 0)
-console.log(ll)
