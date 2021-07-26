@@ -10,8 +10,8 @@ class LinkedList{
         this.head = null;
     }
 
-    insertFirst(value){
-        this.head = new Node(value,this.head);
+    insertFirst(data){
+        this.head = new Node(data,this.head);
     }
 
     size(){
@@ -56,31 +56,34 @@ class LinkedList{
         }
         let previous = this.head;
         let node = this.head.next
-        while (node) { 
+        while (node.next) { 
             previous = node;
             node = node.next;  
         }
         previous.next = null;
     }
 
-    insertLast(value){
+    insertLast(data){
         const lastNode = this.getLast()
         if(lastNode){
-            lastNode.next = new Node(value);
+            lastNode.next = new Node(data);
         } else{
-            this.head = new Node(value);
+            this.head = new Node(data);
         }
     }
 
     getAt(index){
-        if(index < 0) return null;
+        // if(index < 0) return null;
         let counter = 0;
-        let currentHead = this.head;
-        while (counter !== index) {
-            currentHead = currentHead.next;
+        let node = this.head;
+        while (node) {
+            if(counter === index){
+                return node;
+            }
             counter++;
+            node = node.next;
         }
-        return currentHead;
+        return node;
     }
 
     removeAt(index){
@@ -94,6 +97,37 @@ class LinkedList{
 
         return previous.next = previous.next.next;
     }
+
+    insertAt(data, index){
+        if(!this.head){
+            this.head = new Node(data)
+            return;
+        }
+        if(index === 0){
+            this.head = new Node(data, this.head);
+        }
+        const previous = this.getAt(index - 1) || this.getLast();
+        const node = new Node(data, previous.next);
+        previous.next = node;
+    }
+
+    forEach(fn){
+        let node = this.head;
+        let counter = 0;
+        while (node) {
+           fn(node, counter);
+           node = node.next;
+           counter++; 
+        }
+    }
+
+    *[Symbol.iterator](){
+        let node = this.head;
+        while (node) {
+            yield node;
+            node = node.next;
+        }
+    }
 }
 
 const ll = new LinkedList()
@@ -101,5 +135,5 @@ ll.insertFirst(1)
 ll.insertFirst(2)
 ll.insertFirst(3)
 ll.insertFirst(4)
-ll.insertLast(0)
-console.log(ll.removeAt(1))
+ll.insertAt(5, 0)
+console.log(ll)
