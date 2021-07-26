@@ -5,26 +5,27 @@ class Node{
     }
 }
 
-class Queue{
+class Stack {
     constructor(){
         this.first = undefined;
         this.last = undefined;
-        this.size = 0;
+        this.size = 0
     }
-    enqueue(val){
+    push(val){
         let newNode = new Node(val);
-        if(!this.first){
+        if(this.size === 0){
             this.first = newNode;
-            this.last = newNode;
+            this.last = this.first;
         } else {
-            this.last.next = newNode;
-            this.last = newNode;
+            let temp = this.first;
+            this.first = newNode;
+            this.last.next = temp;
         }
         return ++this.size;
     }
-    dequeue(){
+    pop(){
         if(!this.first) return undefined;
-        let temp = this.first;
+        var temp = this.first;
         if(this.first === this.last){
             this.last = undefined;
         }
@@ -34,25 +35,17 @@ class Queue{
     }
 }
 
-class Queue2{
+class Stack2{
     constructor(){
         this.data = [];
-        this.length = 0
     }
-    add(val){
-        this.data.unshift(val);
-        this.length++;
+    push(val){
+        this.data.unshift(val)
     }
-    remove(){
-        const temp = this.data.pop();
-        this.length--;
-        return temp;
+    pop(){
+        return this.data.shift();
     }
-    peek() {
-      return this.data[this.data.length -1]
+    peek(){
+        return this.data[0];
     }
 }
-
-const q = new Queue2;
-q.add(1)
-console.log(q.length)
